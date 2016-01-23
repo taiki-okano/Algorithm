@@ -1,0 +1,48 @@
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+
+class data{
+public:
+    int stime, etime, eff;
+
+    bool operator<(data &d)const{
+        return stime < d.stime;
+    }
+};
+
+int N, M, R;
+dp[MAX_M]
+const int MAX_N = 10000000, MAX_M = 1000;
+data datas[MAX_M];
+
+int main(){
+    cin >> N >> M >> R;
+
+    for(int i = 0; i < M; ++i){
+        cin >> datas[i].stime >> datas[i].etime >> datas[i].eff;
+    }
+    sort(s, s + m);
+    
+    for(int i = 0; i < M; ++i){
+        int max;
+        
+        for(int j = 0; j < i; ++j){
+            if(datas[j].stime + R < datas[i].end)
+                max = std::max(max, dp[j]);
+        
+        dp[i] == max + datas[i].eff;
+    }
+}
+
+    int ans;
+    for(int i = 0; i < M; ++i){
+        ans = std::max(ans, dp[i]);
+    }
+
+    cout << ans << endl;
+
+    return 0;
+}
+
