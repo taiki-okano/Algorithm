@@ -31,3 +31,6 @@
 *.DS_Store
 *.swp
 *.un
+*.swp~
+*.un~
+*~
