@@ -13,11 +13,6 @@ std::string compare(std::string s1, std::string s2){
 }
 
 int main(){
-	std::string str1, str2, str3;
-	str1 = -1;
-	str2 = "123123";
-	char c = '2';
-	str3 = c;
-	str3 = -1;
-	std::cout << compare(str1, str2) << std::endl << str3 << std::endl;
+
+    std::cout << (-2) % 2 << std::endl;
 }

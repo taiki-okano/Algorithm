@@ -1,23 +1,28 @@
 #include <iostream>
 #include <algorithm>
 
-const int MAX_K = 101, MAX_N = 1001;
+typedef unsigned long long ull;
 
-int k, n;
-int dp[MAX_K][MAX_N];
+constexpr int MAX_N = 1001, MAX_K = 101;
+constexpr ull MOD = 100000000000000000;
 
-void solve(){
-    for(int i = 0; i < n; ++i){
-        for(int j = 0; j <= k; ++j){
-            dp[j] = std::max(dp[j], dp[j]:);//嫌だなぁ、疲れた、めんどくせ
-        }
-    }
-    return;
-}
+int n, k;
+ull dp[MAX_N + 16][MAX_K + 16][2]; //KドルまでのコインでNドルを支払う時の払い方。
+
+void fill_dp();
+
+void solve();
 
 int main(){
     std::cin >> n >> k;
     solve();
-    std::cout << dp[k];
     return 0;
+}
+
+void solve(){
+    dp[1] = 1;
+}
+
+void fill_dp(){
+
 }
