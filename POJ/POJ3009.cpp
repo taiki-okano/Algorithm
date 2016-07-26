@@ -1,62 +1,64 @@
 #include <iostream>
-#include <queue>
 
-#define MAX_WH 20
+#define MAX_W 20
+#define MAX_H 20
 
-typedef std::pair<int, int> P;
+int w, h;
+int sx, sy;
+int ans;
+char field[MAX_W][MAX_H];
 
-const int dx[] = {0, 1, 0, -1}, dy[] = {1, 0, -1, 0}
+const int dx[] = {1, 0, -1, 0}, dy[] = {0, 1, 0, -1};
 
-int W, H, sx, sy, gx, gy, ans;
-char field[MAX_WH][MAX_WH];
-
-void solve();
-
-void bfs();
+bool dfs(int x, int y, int count);
 
 int main(){
 	while(true){
-		std::cin >> W >> H;
-		for(int i = 0; i < W; ++W){
-			for(int j = 0; j < H; ++j){
-				std::cin >> field[i][j];
-				if(field[i][j] == '2')
-					sx = i, sy = j;
-				else if(field[i][j] == '3')
-					gx = i, gy = j;
+		std::cin >> w >>h;
+		for(int i = 0; i < h; ++i){
+			for(int j = 0; j < w; ++j){
+				std::cin >> field[j][i];
+				if(field[j][i] == '2')
+					sx = j, sy = i; 
 			}
 		}
-		solve();
+
+		if(dfs(sx, sy, 0))
+			std::cout << ans << std::endl;
+		else
+			std::cout << "-1" << std::endl;
 	}
 	return 0;
 }
 
-void solve(){
-	bfs();
-	return;
-}
+bool dfs(int x, int y, int count){
+	if(count > 10)
+		return false;
 
-void bfs(){
-	int dis[MAX_WH][MAX_WH];
-	std::queue<P> que;
-	que.push(P(sx, sy));
-	dis[sx][sy] = 0;
+	for(int i = 0; i < 4; ++i){
+		int nx = x, ny = y;
 
-	while(!que.empty()){
-		P p = que.front();
-		que.pop();
-
-		for(int i = 0; i < 4; ++i){
-			int nx = p.first, ny = p.second;
-			while(){
-				nx += dx[i], ny += dy[i];
-				if(nx >= 0 && ny >= 0 && nx < W && ny < H && field[nx][ny] == '1')
-					break;
-
-				
+		while(true){
+			if(nx + dx[i] >= 0 && nx + dx[i] < MAX_W && ny + dy[i] >= 0 && ny + dy[i] < MAX_H){
+				if(dfs(nx, ny, count + 1))
+					return true;
+				else
+					return false;
 			}
-			dis[nx][ny] = dis[p.first][p.second] + 1;
+			if(field[nx + dx[i]][ny + dy[i]] == '1'){
+				field[nx + dx[i]][ny + dy[i]] == '0';
+				if(dfs(nx, ny, count + 1))
+					return true;
+				else{
+					field[nx + dx[i]][ny + dy[i]] == '1';
+					return false;
+				}
+			}
+			if(field[nx + dx[i]][ny + dy[i]] == '3'){
+				ans = count + 1;
+				return true;
+			}
 		}
+		return false;
 	}
-	return;
 }
