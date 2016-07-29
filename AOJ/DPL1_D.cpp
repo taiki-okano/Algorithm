@@ -1,44 +1,20 @@
 #include <cstdio>
+#include <algorithm>
+#include <limits>
 
+constexpr int INF_I = std::numeric_limits<int>::max();
 constexpr int MAX_N = 100000;
 
-int N;
-int A[MAX_N];
-
-void solve();
-
 int main(){
+    int N;
+    int L[MAX_N];
     scanf("%d", &N);
+    std::fill(L, L + N + 1, INF_I);
     for(int i = 0; i < N; ++i){
-        scanf("%d", &A[i]);
+        int A;
+        scanf("%d", &A);
+        *std::lower_bound(L, L + N + 1, A) = A;
     }
-    solve();
-}
-
-void solve(){
-    int dp[MAX_N], length = 0;
-    dp[0] = 0;
-    for(int i = 0; i < N; ++i){
-        if(dp[length] < A[i]){
-            dp[++length] = A[i];
-            printf("dp[%d] : %d, A[%d] : %d", length - 1, dp[length - 1], i, A[i]);
-        }
-        else{
-            int low = 0, mid, high = length;
-            while(low < high){
-                mid = (low + high) / 2;
-                if(dp[mid] > A[i]){
-                    high = mid - 1;
-                }
-                else{
-                    low = mid + 1;
-                }
-            }
-            dp[mid] = A[i];
-        }
-    }
-    for(int i = 0; i < N; ++i){
-        printf("%d\n", dp[i]);
-    }
-    printf("%d\n", length);
+    printf("%d\n", std::lower_bound(L, L + N, INF_I) - L);
+    return 0;
 }
