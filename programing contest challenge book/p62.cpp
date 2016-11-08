@@ -1,34 +1,47 @@
-#include <iostream>
+#include <cstdio>
 #include <cstring>
 
 constexpr int MAX_N = 100;
-constexpr int MAX_AMK = 100000;
+constexpr int MAX_K = 100000;
 
-int n, k;
-int a[MAX_AMK], m[MAX_AMK]
+int N, K, a[MAX_N], m[MAX_N];
+int dp[MAX_K + 1];
 
-int dp [MAX_AMK] = {-1};
-
-void solve(){
-    memset(dp, -1, sizeof(dp));
-
-    dp[0] = 0;
-
-    for(int i = 0; i < n; ++i){
-        for(int j = 0; j < k; ++j){
-            if(dp[j] >= 0) dp[j] = m[i];
-            else if(j < a[i] || dp[j - a[i]] <= 0) dp[j] = -1;
-            else dp[j] = dp[j - a[i]] - 1;
-        }
-    }
-    return;
-}
+void solve();
 
 int main(){
-    std::cin >> n;
-    for(int i = 0; i < n; ++i) std::cin >> a[i] >> m[i];
-    std::cin >> k;
-    solve();
-    std::cout << dp[k];
-    return 0;
+	memset(dp, -1, sizeof(dp));
+
+	scanf("%d%d", &N, &K);
+
+	for(int i = 0; i < N; ++i){
+		scanf("%d%d", &a[i], &m[i]);
+	}
+
+	solve();
+}
+
+void solve(){
+	dp[0] = 0;
+
+	for(int i = 0; i < N; ++i){
+		for(int j = 0; j <= K; ++j){
+			if(dp[j] >= 0){
+				dp[j] = m[i];	
+			}
+			else if(j < a[i] || dp[j - a[i]] <= 0){
+				dp[j] = -1;
+			}
+			else{
+				dp[j] = dp[j - a[i]] - 1;
+			}
+		}
+	}
+
+	if(dp[K] >= 0){
+		puts("YES");
+	}
+	else{
+		puts("NO");
+	}
 }
