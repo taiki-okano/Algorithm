@@ -33,7 +33,6 @@ void solve(){
 			if(dp[j] >= 0){
 				dp[j] = m[i];
 			}
-			else if()
 		}
 	}
 }
