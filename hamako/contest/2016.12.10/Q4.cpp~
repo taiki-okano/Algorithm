@@ -1,0 +1,10 @@
+#include <iostream>
+
+int N, M;
+
+int main(){
+	std::ios::sync_with_stdio(false);
+
+	std::cin >> N >> M;
+	return 0;
+}
