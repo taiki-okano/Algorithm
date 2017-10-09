@@ -1,56 +1,79 @@
 #include <cstdio>
+#include <iostream>
 #include <algorithm>
+#include <limits>
 
-constexpr int INF = 1000000000;
 constexpr int MAX_V = 15;
 
 int V, E;
-int memo[1 << MAX_V][MAX_V] = {-1}, dis[MAX_V][MAX_V] = {-1};
+int edges[MAX_V][MAX_V] = {};
 
-int tsp(int s = 1, int v = 0);
+int tsp(int bits, int pos);
 
 int main(){
-    scanf("%d%d", &V, &E);
-    for(int i = 0; i < 1 << V; ++i){
-        for(int j = 0; j < V; ++j){
-            memo[i][j] = -1;
+
+    //scanf("%d %d\n", &V, &E);
+    std::cin >> V >> E;
+
+    for(int i = 0; i < E; ++i){
+        for(int j = 0; j < E; ++j){
+            edges[i][j] = -1;
         }
     }
-    for(int i = 0; i < V; ++i){
-        for(int j = 0; j < V; ++j){
-            dis[i][j] = INF;
-        }
-    }
+
     for(int i = 0; i < E; ++i){
         int s, t, d;
-        scanf("%d%d%d", &s, &t, &d);
-        dis[s][t] = d;
+        //scanf("%d %d %d\n", &s, &t, &d);
+        std::cin >> s >> t >> d;
+
+        edges[s][t] = d;
     }
-    int tmp = tsp();
-    if(tmp >= INF){
+
+    int ans = std::numeric_limits<int>::max();
+    for(int i = 0; i < V; ++i){
+        ans = std::min(ans, tsp(0, i));
+    }
+
+    if(ans == std::numeric_limits<int>::max()){
         puts("-1");
+        return 0;
     }
-    else{
-        printf("%d\n", tmp);
-    }
+
+    printf("%d\n", ans);
+
     return 0;
 }
 
-int tsp(int s, int v){
-    if(memo[s][v] != -1){
-        return memo[s][v];
-    }
-    if(s == ((1 << V) - 1)){
-        return dis[v][0];
-    }
-    
-    int res = INF;
-    for(int i = 0; i < V; ++i){
-        if(s & 1 << i){
-            continue;
-        }
-        res = std::min(res, tsp(s | (1 << i), i) + dis[v][i]);
+int tsp(int bits, int pos){
+
+    int res = std::numeric_limits<int>::max();
+
+    if(bits == (1 << (V + 1)) - 1){
+        return 0;
     }
 
-    return memo[s][v] = res;
+    for(int i = 0; i < V; ++i){
+
+        if(edges[pos][i] == -1){
+            continue;
+        }
+
+        if((bits & 1 << i) != 0){
+            continue;
+        }
+
+        int tmp = tsp(bits | (1 << i), i);
+
+        if(tmp == -1){
+            continue;
+        }
+
+        res = std::min(res, tmp);
+    }
+
+    if(res == std::numeric_limits<int>::max()){
+        return -1;
+    }
+
+    return res;
 }
