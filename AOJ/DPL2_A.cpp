@@ -4,6 +4,7 @@
 #include <limits>
 
 constexpr int MAX_V = 15;
+constexpr int INF = std::numeric_limits<int>::max();
 
 int V, E;
 int edges[MAX_V][MAX_V] = {};
