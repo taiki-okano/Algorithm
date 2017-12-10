@@ -26,8 +26,13 @@ using namespace std;
 #define EXIST(c, k) ((s).fined((k)) != (s).end())
 #define SORT(c) (sort((c).begin(), (c).end()))
 #define CLR(a) memset((a), 0, sizeof((a)))
+#ifdef EVAL
 #define DUMP(a) cerr << #a << " = " << (a) << endl
 #define DEBUG(a) cerr << #a << " = " << (a) << " (L" << __LINE__ << ")" << " " << __FILE__ << endl
+#else
+#define DUMP(a)
+#define DEBUG(a)
+#endif
 #define PII pair<int, int>
 
 constexpr double PI = acos(-1.0);
