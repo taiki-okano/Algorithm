@@ -25,7 +25,7 @@ using namespace std;
 #define EACH(c, x) for(auto& x : (c))
 #define EXIST(c, k) ((s).fined((k)) != (s).end())
 #define SORT(c) (sort((c).begin(), (c).end()))
-#define CLR(a) memset((a), 0, sizeof((a)))
+#define CLR(a, v) memset((a), (v), sizeof((a)))
 #ifdef EVAL
 #define DUMP(a) cerr << #a << " = " << (a) << endl
 #define DEBUG(a) cerr << #a << " = " << (a) << " (L" << __LINE__ << ")" << " " << __FILE__ << endl
@@ -45,9 +45,41 @@ using uint = unsigned int;
 using ll = long long;
 using ull = unsigned long long;
 
+constexpr int MAX_V = 100000;
+constexpr int INF = INT_MAX;
+
+struct vertex{
+	int v, cost;
+}
+
+bool operator< (const &vertex lhs, const &vertex rhs){
+	if(lhs.cost < rhs.cost){
+		return true;
+	}
+	return false;
+}
+
 int main(){
 	cin.tie(0);
 	ios::sync_with_stdio(false);
+
+	int V, E, r, edges[MAX_V][MAX_V], dis[MAX_V];
+
+	CLR(edges, INF);
+	CLR(dis, INF);
+
+	cin >> V >> E >> r;
+
+	dis[r - 1] = 0;
+
+	REP(i, E){
+		int a, b, c;
+		cin >> a >> b >> c;
+		--a, --b;
+		edges[a][b] = c;
+	}
+
+	queue<vertex> que = 
 
 	return 0;
 }

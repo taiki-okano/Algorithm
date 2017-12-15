@@ -26,14 +26,24 @@ using namespace std;
 #define EXIST(c, k) ((s).fined((k)) != (s).end())
 #define SORT(c) (sort((c).begin(), (c).end()))
 #define CLR(a) memset((a), 0, sizeof((a)))
+#ifdef EVAL
 #define DUMP(a) cerr << #a << " = " << (a) << endl
 #define DEBUG(a) cerr << #a << " = " << (a) << " (L" << __LINE__ << ")" << " " << __FILE__ << endl
+#else
+#define DUMP(a)
+#define DEBUG(a)
+#endif
 #define PII pair<int, int>
 
 constexpr double PI = acos(-1.0);
 constexpr double EPS = 1e-10;
+<<<<<<< HEAD
 template<typename T> inline T SQR(T a){ return a * a; }
 template<typename T> inline T POW(T a, int n){int res = 1;while(n--) res *= a;return res;}
+=======
+template<typename T> inline T SQR(T a){return a*a;}
+template<typename T> inline T POW(T a,int n){int res=1;while(n--)res*=a;return res;}
+>>>>>>> 30720aedfb275ed8714566c7be0803a38c41d24d
 inline int toInt(string s) {int v;istringstream sin(s);sin>>v;return v;}
 template<class T> inline string toString(T x) {ostringstream sout;sout<<x;return sout.str();}
 using uint = unsigned int;
