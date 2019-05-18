@@ -41,7 +41,6 @@ template<typename T> inline T SQR(T a){return a*a;}
 template<typename T> inline T POW(T a,int n){int res=1;while(n--)res*=a;return res;}
 inline int toInt(string s) {int v;istringstream sin(s);sin>>v;return v;}
 template<class T> inline string toString(T x) {ostringstream sout;sout<<x;return sout.str();}
-using uint = unsigned int;
 using ll = long long;
 using ull = unsigned long long;
 
